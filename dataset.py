@@ -8,9 +8,9 @@ from PIL import Image # used for reading images in image storage
 import random # sampling captcha text
 import cv2
 
-classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] # 36 classes
 # 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-classes_len = len(classes)
+classes_len = len(classes) # 36 for now
 captcha_size = 4
 
 image_height = 60
@@ -32,21 +32,20 @@ def gen_captcha_text_and_image():
     captcha_image = Image.open(image.generate(captcha_text))
     return captcha_text, captcha_image
 
-# generating data for datasets
-image_count = 80000 # number of images to be generated
-path = 'four_dig_cap' # where the images will be stored.
-if not os.path.exists(path):
-    os.makedirs(path)
-for i in range(image_count):
-    text, image = gen_captcha_text_and_image()
-    filename = text+'-'+str(i)+'.png'
-    image_path = path  + '/' +  filename
-    image.save(image_path)
-    print(f'Saved {filename} in {path}')
+# generating data for datasets - comment this piece of code to prevent the program from generating more images in case you already have the data.
+# image_count = 80000 # number of images to be generated
+# path = 'four_cap_36' # where the images will be stored.
+# if not os.path.exists(path):
+#     os.makedirs(path)
+# for i in range(image_count):
+#     text, image = gen_captcha_text_and_image()
+#     filename = text+'-'+str(i)+'.png'
+#     image_path = path  + '/' +  filename
+#     image.save(image_path)
+#     print(f'Saved {filename} in {path}')
 
 # Creating a custom dataset. 
 # Reference: https://pytorch.org/tutorials/beginner/basics/data_tutorial.html
-
 class CustomImageDataset(Dataset):
     def __init__(self, annotations_file, img_dir):
         self.img_labels = self.read_annotations_file(annotations_file)
@@ -70,11 +69,10 @@ class CustomImageDataset(Dataset):
         img_labels = [line.strip().split(',') for line in lines]
         return img_labels
 
-# one_dig_no_noise_dev = CustomImageDataset('one_dig_no_dev.txt', "one_digit_no_noise/dev")
-# one_dig_no_noise_test = CustomImageDataset('one_dig_no_test.txt', "one_digit_no_noise/test")
+four_cap_36_dataset = CustomImageDataset('four_cap_36.txt', "four_cap_36")
 
-# print(len(one_dig_no_noise_dev))
-# idx = 0
-# image, label = one_dig_no_noise_dev[idx]
-# print("Image shape:", image)
-# print("Label:", label)
+print(len(four_cap_36_dataset))
+idx = 0
+image, label = four_cap_36_dataset[idx]
+print("Image shape:", image)
+print("Label:", label)

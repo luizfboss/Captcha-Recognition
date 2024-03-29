@@ -1,1 +1,10 @@
 Data distribution: 70%/15%/15% --> 80k examples total --> 56k/12k/12k
+
+
+Steps:
+1 - Create custom dataset (DONE)
+2 - Create dataset instance (DONE) 
+3 - Create Noise Reduction Filter (get one from github - add credit and reference in the code)
+4 - Work on preprocessing dataset
+
+5 - Once all images have been preprocessed in the dataloader and split into smaller images, work on network that will get these smaller images.
