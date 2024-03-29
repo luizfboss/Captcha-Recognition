@@ -7,6 +7,8 @@ from torchvision.io import read_image
 from PIL import Image # used for reading images in image storage
 import random # sampling captcha text
 import cv2
+from PIL import Image
+
 
 classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] # 36 classes
 # 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
@@ -69,10 +71,16 @@ class CustomImageDataset(Dataset):
         img_labels = [line.strip().split(',') for line in lines]
         return img_labels
 
-four_cap_36_dataset = CustomImageDataset('four_cap_36.txt', "four_cap_36")
+
+four_cap_36_dataset = CustomImageDataset("four_cap_36.txt", "four_cap_36")
 
 print(len(four_cap_36_dataset))
 idx = 0
 image, label = four_cap_36_dataset[idx]
-print("Image shape:", image)
+
+# Convert the tensor to a NumPy array
+image_np = image.numpy()
+
+
+print("Image shape:", image_np)
 print("Label:", label)
