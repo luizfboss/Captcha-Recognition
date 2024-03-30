@@ -1,81 +1,71 @@
 import os
 from torchvision.io import read_image
 from torch.utils.data import Dataset
+import dataset
+import torch
+import numpy as np
+import PIL
+import cv2
 
-# a place to test some functionalities :)
-file = open("one_digit_captcha.txt")
-img_dir = 'one_digit_captcha/dev'
 
+# def reduce_noise(channel):
+#     # Apply noise reduction algorithm to the channel (e.g., Gaussian blur)
+#     blurred = cv2.GaussianBlur(channel, (5, 5), 0)
+# 
+#     # You can apply additional noise reduction techniques as needed
+#     # For example, thresholding, morphological operations, etc.
+# 
+#     # Convert the image to grayscale
+#     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+# 
+#     # Apply Gaussian blur to reduce noise
+#     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+# 
+#     # Apply adaptive thresholding
+#     _, thresholded = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+# 
+#     # Apply morphological operations (closing) to further remove noise
+#     kernel = np.ones((3, 3), np.uint8)
+#     closed = cv2.morphologyEx(thresholded, cv2.MORPH_CLOSE, kernel)
+#     return closed
+# 
+# def reduce_noise_captcha(image):
+#     # Split the image into its RGB channels
+#     channel_r, channel_g, channel_b = image[0], image[1], image[2]
+# 
+#     # Apply noise reduction to each channel
+#     # channel_r_processed = reduce_noise(channel_r)
+#     # channel_g_processed = reduce_noise(channel_g)
+#     # channel_b_processed = reduce_noise(channel_b)
+# 
+#     # # Combine the processed channels back into a single image
+#     processed_image = cv2.merge((channel_r, channel_g, channel_b))
+# 
+#     # return processed_image
+#     return processed_image
+# 
 
-# def get_item(idx):
-#         with open("one_digit_captcha.txt", 'r') as file:
-#             line = file.readlines()[idx].split(',')
-#             image_file = line[0] # image file name
-#             img_path = os.path.join(img_dir, image_file)
-#             image = read_image(img_path)
-#             label = line[1].strip()
-#         if transform:
-#             image = transform(image)
-#         if target_transform:
-#             label = target_transform(label)
-#         return image, label
+four_cap_36_dataset = dataset.CustomImageDataset("four_cap_36.txt", "four_cap_36")
 
-# for i in range(0, 10):
-#     print(get_item(i))
-
-class CustomImageDataset(Dataset):
-    def __init__(self, annotations_file, img_dir, transform=None, target_transform=None):
-        self.img_labels = self.read_annotations_file(annotations_file)
-        self.img_dir = img_dir
-        self.transform = transform
-        self.target_transform = target_transform
-
-    def __len__(self):
-        return len(self.img_labels)
-
-    def __getitem__(self, idx):
-        img_filename, label = self.img_labels[idx]
-        img_path = os.path.join(self.img_dir, img_filename)
-        image = read_image(img_path)
-        if self.transform:
-            image = self.transform(image)
-        if self.target_transform:
-            label = self.target_transform(label)
-        return image, label
-
-    # format: [labels
-    def read_annotations_file(self, annotations_file):
-        with open(annotations_file, 'r') as file:
-            lines = file.readlines()
-        img_labels = [line.strip().split(',') for line in lines]
-        return img_labels
-    
-# Assuming your text file is named 'annotations.txt'
-annotations_file = 'four_digits_captcha_label.txt'
-img_dir = 'four_digits_captcha/dev'
-
-# Define your transform and target_transform if any
-transform = None
-target_transform = None
-
-# Create an instance of CustomImageDataset
-dataset = CustomImageDataset(annotations_file, img_dir, transform=transform, target_transform=target_transform)
-
-# Test __len__ method
-print("Length of dataset:", len(dataset))
-
-# Test __getitem__ method
+print(len(four_cap_36_dataset))
 idx = 0
-image, label = dataset[idx]
-print("Image shape:", image.shape)
-print("Label:", label)
-    # def __getitem__(self, idx):
-    #     img_filename, label = self.img_labels[idx]
-    #     img_path = os.path.join(self.img_dir, img_filename)
-    #     image = read_image(img_path)
-    #     if self.transform:
-    #         image = self.transform(image)
-    #     if self.target_transform:
-    #         label = self.target_transform(label)
-    #     return image, label
+image, label = four_cap_36_dataset[idx]
+# image = image[0]
 
+# Assuming 'image' is your tensor storing the image array with shape (height, width, channels)
+# Convert the tensor to a numpy array
+
+# Apply noise reduction to the image array
+# reduced_image_array = reduce_noise_captcha(image_array)
+# print(reduced_image_array)
+
+# Convert the processed image array back to a tensor
+# reduced_image = torch.from_numpy(reduced_image_array)
+
+# Overwrite the tensor's image with the processed one
+# image[:] = reduced_image[:]
+
+# image = tensor_to_image(image)
+
+print(image)
+print(label)
