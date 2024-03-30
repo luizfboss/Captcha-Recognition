@@ -45,11 +45,13 @@ import cv2
 #     return processed_image
 # 
 
-four_cap_36_dataset = dataset.CustomImageDataset("four_cap_36.txt", "four_cap_36")
+# four_cap_36_dataset = dataset.CustomImageDataset("four_cap_36.txt", "four_cap_36")
 
-print(len(four_cap_36_dataset))
-idx = 0
-image, label = four_cap_36_dataset[idx]
+# print(len(four_cap_36_dataset))
+# idx = 0
+# image, label = four_cap_36_dataset[idx]
+# print(image)
+# print(label)
 # image = image[0]
 
 # Assuming 'image' is your tensor storing the image array with shape (height, width, channels)
@@ -67,5 +69,29 @@ image, label = four_cap_36_dataset[idx]
 
 # image = tensor_to_image(image)
 
-print(image)
-print(label)
+import cv2
+import easyocr
+import matplotlib.pyplot as plt
+
+# This needs to run only once to load the model into memory
+reader = easyocr.Reader(['en'])
+
+# reading the image
+img = cv2.imread('four_cap_36/0A0I-31668.png')
+
+# run OCR
+results = reader.readtext(img)
+print(results)
+
+# show the image and plot the results
+# plt.imshow(img)
+# for res in results:
+#     # bbox coordinates of the detected text
+#     xy = res[0]
+#     xy1, xy2, xy3, xy4 = xy[0], xy[1], xy[2], xy[3]
+#     # text results and confidence of detection
+#     det, conf = res[1], res[2]
+#     # show time :)
+#     plt.plot([xy1[0], xy2[0], xy3[0], xy4[0], xy1[0]], [xy1[1], xy2[1], xy3[1], xy4[1], xy1[1]], 'r-')
+#     plt.text(xy1[0], xy1[1], f'{det} [{round(conf, 2)}]')
+# 
