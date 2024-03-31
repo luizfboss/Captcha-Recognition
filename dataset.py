@@ -37,16 +37,16 @@ def gen_captcha_text_and_image():
     return captcha_text, captcha_image
 
 # generating data for datasets - comment this piece of code to prevent the program from generating more images in case you already have the data.
-# image_count = 80000 # number of images to be generated
-# path = 'four_cap_36' # where the images will be stored.
-# if not os.path.exists(path):
-#     os.makedirs(path)
-# for i in range(image_count):
-#     text, image = gen_captcha_text_and_image()
-#     filename = text+'-'+str(i)+'.png'
-#     image_path = path  + '/' +  filename
-#     image.save(image_path)
-#     print(f'Saved {filename} in {path}')
+image_count = 1000 # number of images to be generated
+path = 'four_cap_36_new' # where the images will be stored.
+if not os.path.exists(path):
+    os.makedirs(path)
+for i in range(image_count):
+    text, image = gen_captcha_text_and_image()
+    filename = text+'-'+str(i)+'.png'
+    image_path = path  + '/' +  filename
+    image.save(image_path)
+    print(f'Saved {filename} in {path}')
 
 # Creating a custom dataset. 
 # Reference: https://pytorch.org/tutorials/beginner/basics/data_tutorial.html
