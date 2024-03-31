@@ -12,9 +12,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] # 36 classes
-# 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-classes_len = len(classes) # 36 for now
+classes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] # 35 classes
+classes_len = len(classes) # 35 for now
 captcha_size = 4
 
 image_height = 60
@@ -37,8 +36,8 @@ def gen_captcha_text_and_image():
     return captcha_text, captcha_image
 
 # generating data for datasets - comment this piece of code to prevent the program from generating more images in case you already have the data.
-image_count = 1000 # number of images to be generated
-path = 'four_cap_36_new' # where the images will be stored.
+image_count = 6000 # number of images to be generated
+path = 'four_cap_36' # where the images will be stored.
 if not os.path.exists(path):
     os.makedirs(path)
 for i in range(image_count):
