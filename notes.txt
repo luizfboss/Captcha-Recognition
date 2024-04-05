@@ -6,7 +6,9 @@ Steps:
 2 - Create dataset instance (DONE) 
 3 - Create Noise Reduction Filter (DONE)
 4 - Work on preprocessing dataset (DONE)
-5 - Once all images have been preprocessed in the dataloader and split into smaller images, work on network that will get these smaller images. (in progress)
+5 - Once all images have been preprocessed in the dataloader and split into smaller images, work on network that will get these smaller images. (In progress, almost done)
+6 - Increase dataset (In progress)
+
 
 To ask later:
 - How does the model know which outputs correspond to the right ones? For example, I have a list with 35 different characters, and the model does not know that. I did not specify to the model which those are. Do I have to? Do I just let the model figure it out itself?
