@@ -1,4 +1,4 @@
-Data distribution: 70%/15%/15% --> 80k examples total --> 56k/12k/12k
+Data distribution: 70%/15%/15% --> 10k CAPTCHA examples total
 
 
 Steps:
