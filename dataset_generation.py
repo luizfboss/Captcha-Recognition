@@ -36,7 +36,7 @@ def gen_captcha_text_and_image():
     return captcha_text, captcha_image
 
 # generating data for datasets - comment this piece of code to prevent the program from generating more images
-image_count = 5000 # number of images to be generated
+image_count = 2000 # number of images to be generated
 path = 'four_cap_36_new' # where the images will be stored.
 if not os.path.exists(path):
     os.makedirs(path)
